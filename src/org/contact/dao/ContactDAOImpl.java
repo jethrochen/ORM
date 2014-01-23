@@ -9,7 +9,7 @@ package org.contact.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.contact.entity.Contact;
-import org.contact.entity.HibernateUtil;
+import hibernate.HibernateUtil;
 import org.hibernate.Session;
 
 /**

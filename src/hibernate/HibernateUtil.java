@@ -4,14 +4,19 @@
  * Any problem please contact youli9056@126.com
  */
 
-package org.contact.entity;
+package hibernate;
 
+import org.contact.entity.Contact;
+import org.contact.entity.Department;
+import org.contact.entity.Incumbency;
+import org.contact.entity.Person;
+import org.contact.entity.Project;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.SessionFactoryObserver;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -28,7 +33,8 @@ public class HibernateUtil {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
             Configuration config = getConfiguration();
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).build();
+            //serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).build();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
             config.setSessionFactoryObserver(new SessionFactoryObserver(){
                 private static final long serialVersionUID = 1L;
 
@@ -38,7 +44,7 @@ public class HibernateUtil {
 
                 @Override
                 public void sessionFactoryClosed(SessionFactory sf) {
-                    ServiceRegistryBuilder.destroy(serviceRegistry);
+                    StandardServiceRegistryBuilder.destroy(serviceRegistry);
                 }
             });
             sessionFactory = config.buildSessionFactory(serviceRegistry);
@@ -54,6 +60,11 @@ public class HibernateUtil {
     private static Configuration getConfiguration(){
         Configuration cfg = new Configuration();
         cfg.addAnnotatedClass(Contact.class);
+        cfg.addAnnotatedClass(Department.class);
+        cfg.addAnnotatedClass(Person.class);
+        cfg.addAnnotatedClass(Incumbency.class);
+        cfg.addAnnotatedClass(Project.class);
+        
         cfg.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         cfg.setProperty("hibernate.connection.url", "jdbc:mysql://127.0.0.1:3306/hrs_db");
         cfg.setProperty("hibernate.connection.username", "root");
