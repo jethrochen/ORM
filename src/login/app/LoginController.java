@@ -3,6 +3,7 @@
  */
 package login.app;
 
+import hrs.HrsMain;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,12 +29,8 @@ public class LoginController extends AnchorPane implements Initializable {
     @FXML
     Label errorMessage;
 
-    private Main application;
+    //private HrsMain application;
     
-    
-    public void setApp(Main application){
-        this.application = application;
-    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,14 +38,9 @@ public class LoginController extends AnchorPane implements Initializable {
     }
 
     public void processLogin(ActionEvent event) {
-        if (application == null){
-            // We are running in isolated FXML, possibly in Scene Builder.
-            // NO-OP.
-            errorMessage.setText("Hello " + userId.getText());
-        } else {
-            if (!application.userLogging(userId.getText(), password.getText())){
+
+            if (!HrsMain.hrsMain.userLogging(userId.getText(), password.getText())){
                 errorMessage.setText("Unknown user " + userId.getText());
             }
-        }
     }
 }

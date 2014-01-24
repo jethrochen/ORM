@@ -3,6 +3,7 @@
  */
 package login.app;
 
+import hrs.HrsMain;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -37,10 +38,8 @@ public class ProfileController extends AnchorPane implements Initializable {
     @FXML 
     private Label success;
     
-    private Main application;
     
-    public void setApp(Main application){
-        this.application = application;
+    public void setApp(HrsMain application){
         User loggedUser = application.getLoggedUser();
         user.setText(loggedUser.getId());
         email.setText(loggedUser.getEmail());
@@ -57,19 +56,15 @@ public class ProfileController extends AnchorPane implements Initializable {
     }
     
     public void processLogout(ActionEvent event) {
-        if (application == null){
-            return;
-        }
-        
-        application.userLogout();
+        HrsMain.hrsMain.userLogout();
     }
     
     public void processUpdate(ActionEvent event) {
-        if (application == null){
+        if (HrsMain.hrsMain == null){
             animateMessage();
             return;
         }
-        User loggedUser = application.getLoggedUser();
+        User loggedUser = HrsMain.hrsMain.getLoggedUser();
         loggedUser.setEmail(email.getText());
         loggedUser.setPhone(phone.getText());
         loggedUser.setSubscribed(subscribed.isSelected());
