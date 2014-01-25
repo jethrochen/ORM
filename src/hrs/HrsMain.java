@@ -161,7 +161,8 @@ public class HrsMain extends Application {
         highlightsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // goToPage(Pages.)
+                System.out.println("goto personinfo page");
+                goToPage(Pages.PERSONINFO);
             }
         });
         toolBar.getItems().add(highlightsButton);
@@ -172,7 +173,7 @@ public class HrsMain extends Application {
         newButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //goToPage(Pages.NEW);
+                goToPage(Pages.PERSONLIST);
             }
         });
         toolBar.getItems().add(newButton);

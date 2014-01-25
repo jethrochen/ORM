@@ -4,10 +4,11 @@
  * Any problem please contact youli9056@126.com
  */
 
-package org.contact.entity;
+package person.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.contact.entity.Department;
+import org.contact.entity.Incumbency;
 
 /**
  * 人员类
@@ -59,7 +62,21 @@ public class Person {
         this.jobTitle = jobTitle;
         this.eduBackground = eduBackground;
     }
+    @Override public boolean equals(Object per){
+        if(per!=null && per instanceof Person){
+            Person p = (Person)per;
+            return p.getPersonId()==getPersonId();
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.personId);
+        hash = 17 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
     public Integer getPersonId() {
         return personId;
     }

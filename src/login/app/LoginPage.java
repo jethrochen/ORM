@@ -17,7 +17,7 @@ import javafx.scene.Node;
  * @author youli
  */
 public class LoginPage extends Page {
-
+    
     public LoginPage(){
         super("login");
     }

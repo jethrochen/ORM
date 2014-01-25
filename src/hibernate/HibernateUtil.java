@@ -9,7 +9,7 @@ package hibernate;
 import org.contact.entity.Contact;
 import org.contact.entity.Department;
 import org.contact.entity.Incumbency;
-import org.contact.entity.Person;
+import person.entity.Person;
 import org.contact.entity.Project;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

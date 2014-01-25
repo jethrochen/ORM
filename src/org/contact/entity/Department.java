@@ -6,6 +6,7 @@
 
 package org.contact.entity;
 
+import person.entity.Person;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +40,15 @@ public class Department{
         this.id = id;
         this.name = name;
     }
-
+    @Override public String toString(){
+        return name;
+    }
+    public void addPerson(Person p){
+        persons.add(p);
+    }
+    public void removePerson(Person p){
+        persons.remove(p);
+    }
     public int getId() {
         return id;
     }

@@ -6,6 +6,7 @@
 
 package org.contact.entity;
 
+import person.entity.Person;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
