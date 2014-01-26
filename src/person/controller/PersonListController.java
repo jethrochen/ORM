@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
+import person.app.PersonListPage;
 import person.entity.Person;
 import person.service.PersonService;
 import person.service.PersonServiceImpl;
@@ -26,6 +27,8 @@ import person.service.PersonServiceImpl;
 public class PersonListController extends Service<ObservableList<Person>> implements Initializable {
 
     private PersonService personService = new PersonServiceImpl();
+    private PersonListPage page;
+    private static int ONEPAGENUM = 1;
     /**
      * Initializes the controller class.
      */
@@ -33,7 +36,17 @@ public class PersonListController extends Service<ObservableList<Person>> implem
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    public void setApp(PersonListPage page){
+        this.page = page;
+        //this.start();
+    }
+    public int getPageNum(){
+        int result = (int)Math.ceil((double)personService.getPersonNum()/ONEPAGENUM);
+        if(result == 0)
+            result = 1;
+        return result;
+    }
     @Override
     protected Task<ObservableList<Person>> createTask() {
         return new GetPersonListTask();
@@ -50,8 +63,12 @@ public class PersonListController extends Service<ObservableList<Person>> implem
                 updateProgress(i, 500);
                 Thread.sleep(5);
             }
-            ObservableList<Person> persons;
-            persons = FXCollections.observableArrayList((List<Person>)personService.getAllPerson());
+           // List<Person> gotPersons = (List<Person>)personService.getAllPerson();
+            //获取第PageId页面的person数据
+            List<Person> gotPersons = (List<Person>)personService.getPagedPerson(PersonListPage.PageId, ONEPAGENUM);
+            ObservableList<Person> persons = FXCollections.observableArrayList(gotPersons);
+            //将详细信息页面的数据设为当前页第一个person
+            page.setSelectedPerson(persons.get(0));
             return persons;
         }
     }

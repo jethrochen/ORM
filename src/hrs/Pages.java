@@ -11,7 +11,7 @@ import java.util.Map;
 import login.app.LoginPage;
 import login.app.ProfilePage;
 import person.app.PersonInfoPage;
-import person.app.PersonList;
+import person.app.PersonListPage;
 
 /**
  * pages 维护所有的页面对象，所有的页面都需要在这里注册到pages里面
@@ -30,7 +30,7 @@ public class Pages {
         pages.put(LOGIN, new LoginPage());
         pages.put(USERPROFILE,new ProfilePage());
         pages.put(PERSONINFO, new PersonInfoPage());
-        pages.put(PERSONLIST, new PersonList());
+        pages.put(PERSONLIST, new PersonListPage());
     }
     public static Page getPage(String pageName){
         return pages.get(pageName);

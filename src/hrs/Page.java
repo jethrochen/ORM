@@ -26,6 +26,12 @@ public abstract class Page extends TreeItem<String>{
     protected Page(String name){
         super(name);
     }
+    /**
+     * 页面元素初始化以后可能需要一些获取默认数据等工作
+     */
+    public void afterInitiate(){
+        
+    }
     public void setName(String name){
         setValue(name);
     }
@@ -46,6 +52,11 @@ public abstract class Page extends TreeItem<String>{
     public int hashCode() {
         return getPath().hashCode();
     }
+
+    public Initializable getController() {
+        return controller;
+    }
+    
     public Pane getFXMLPane(Class rootClass, String fxml) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         InputStream in = rootClass.getResourceAsStream(fxml);

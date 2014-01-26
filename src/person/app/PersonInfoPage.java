@@ -32,9 +32,9 @@ public class PersonInfoPage extends Page {
     public Node createView() {
         try {
             Pane pane = this.getFXMLPane(this.getClass(), "PersonInfo.fxml");
-            Person youli = new Person(201401,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士");
+            //Person youli = new Person(201402,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士");
            // new PersonServiceImpl().addPerson(youli);
-            ((PersonInfoController)controller).setPerson(youli);
+           // ((PersonInfoController)controller).setPerson(youli);
             return pane;
         } catch (IOException ex) {
             Logger.getLogger(PersonInfoPage.class.getName()).log(Level.SEVERE, null, ex);

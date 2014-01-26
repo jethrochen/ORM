@@ -13,43 +13,61 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.PaginationBuilder;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+import person.controller.PersonInfoController;
 import person.controller.PersonListController;
+import person.entity.Person;
 
 /**
  *
  * @author youli
  */
-public class PersonList extends Page{
-    public PersonList(){
+public class PersonListPage extends Page{
+    private static Person selectedPerson;
+    public static int PageId = 0;
+    private PersonInfoPage personInfoPage;
+    private Pagination pagination;
+    public PersonListPage(){
         super("personlist");
     }
-    PersonListController service = new PersonListController();
-    public void start(){
-        service.start();
+    
+    static PersonListController service;
+    public static void list(){
+        service.restart();
+    }
+    public void setSelectedPerson(Person p){
+        selectedPerson = p;
+        ((PersonInfoController)personInfoPage.getController()).setPerson(selectedPerson);
     }
     @Override
     public Node createView() {
+        controller = new PersonListController();
+        service = (PersonListController) controller;
         Group root = new Group();
         root.maxHeight(Double.MAX_VALUE);
         root.maxWidth(Double.MAX_VALUE);
         VBox vbox = new VBox(5);
         vbox.setPadding(new Insets(12));
-        TableView tableView = new TableView();
+        final TableView tableView = new TableView();
         Button refreshButton = new Button("刷新");
         refreshButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent t){
                 service.restart();
             }
         });
-        vbox.getChildren().addAll(tableView, refreshButton);
+        refreshButton.getStyleClass().add("combutton");
+        
         Region veil = new Region();
         veil.setId("personlist-veil");
         ProgressIndicator pi = new ProgressIndicator();
@@ -81,13 +99,35 @@ public class PersonList extends Page{
         pi.visibleProperty().bind(service.runningProperty());
         tableView.itemsProperty().bind(service.valueProperty());
         
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            public void handle(MouseEvent t){
+                setSelectedPerson((Person)tableView.getSelectionModel().getSelectedItem());
+            }
+        });
+        
+        pagination = PaginationBuilder.create().pageCount(service.getPageNum()).pageFactory(new Callback<Integer,Node>(){
+
+            @Override
+            public Node call(Integer pageIndex) {
+                PageId = pageIndex;
+                list();
+                return tableView;
+            }
+            
+        }).build();
+        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        vbox.getChildren().addAll(pagination, refreshButton);
+        
         StackPane stack = new StackPane();
         stack.getChildren().addAll(vbox,veil,pi);
         HBox hbox = new HBox();
         hbox.getChildren().add(stack);
-        hbox.getChildren().add(new PersonInfoPage().createView());
+        personInfoPage = new PersonInfoPage();
+        hbox.getChildren().add(personInfoPage.createView());
         root.getChildren().add(hbox);
-        root.getStylesheets().add(PersonList.class.getResource("Personinfo.css").toExternalForm());
+        root.getStylesheets().add(PersonListPage.class.getResource("Personinfo.css").toExternalForm());
+        service.setApp(this);
+        ((PersonInfoController)personInfoPage.getController()).setPerson(selectedPerson);
         return root;
     }
 

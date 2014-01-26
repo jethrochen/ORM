@@ -6,7 +6,11 @@
 
 package person.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import org.contact.entity.Department;
 import person.dao.PersonDAO;
 import person.dao.PersonDAOImpl;
 import person.entity.Person;
@@ -39,7 +43,8 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public int getPersonNum() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        return 2;
     }
 
     @Override
@@ -49,7 +54,15 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public List<Person> getPagedPerson(int pageId, int onePageNum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch(pageId){
+            case 0:
+                return  Arrays.asList(new Person(201400,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
+                                    new Person(201401,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
+            case 1:
+                return  Arrays.asList(new Person(201402,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
+                                    new Person(201403,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
+        }
+        return null;
     }
 
 }

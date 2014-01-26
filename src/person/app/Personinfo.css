@@ -25,7 +25,7 @@
 }
 
 .profileTitle {
-    -fx-font-size: 18;
+    -fx-font-size: 20;
 }
 
 .hyperlink {
@@ -63,7 +63,7 @@
     -fx-effect: dropshadow( one-pass-box , rgb(0, 0, 0, 0.8), 0, 0.0 , 0 , -1 );
 }
 
-.button {
+.combutton {
     -fx-background-color:
     	rgb(255, 255, 255, 0.08),
     	rgb(0, 0, 0, 0.8),
@@ -81,7 +81,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-.button:focused, .button:hover {
+.combutton:focused, .combutton:hover {
     -fx-background-color:
     	rgb(255, 255, 255, 0.08),
     	rgb(0, 0, 0, 0.8),

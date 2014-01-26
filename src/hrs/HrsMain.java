@@ -437,6 +437,8 @@ public class HrsMain extends Application {
         //pageTree.getSelectionModel().select(page);
         //breadcrumBar.setPath(currentPagePath);
         //
+        //页面元素初始化以后可能需要一些获取默认数据等工作
+        page.afterInitiate();
         changingPage = false;
     }
 }
