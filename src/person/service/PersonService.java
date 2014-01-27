@@ -7,6 +7,7 @@
 package person.service;
 
 import java.util.List;
+import org.contact.entity.Department;
 import person.entity.Person;
 
 /**
@@ -20,11 +21,11 @@ public interface PersonService {
      * @return 员工对象
      */
     public Person getPerson(int personid);
-    public void addPerson(Person person);
-    public void removePerson(int personid);
-    public void updatePerson(Person person);
+    public int addPerson(Person person);
+    public int removePerson(int personid);
+    public int updatePerson(Person person);
     public List<Person> searchPerson(String field, Object fieldValue);
-    
+    public Department getDepartment(String depname);
     /**
      * 用于分页显示时先获取总共员工个数，以便计算页数
      * @return 总员工个数

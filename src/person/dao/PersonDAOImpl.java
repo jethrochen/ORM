@@ -46,7 +46,10 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public void updatePerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session s = HibernateUtil.openSession();
+        s.beginTransaction();
+        s.update(person);
+        s.getTransaction().commit();
     }
 
     @Override

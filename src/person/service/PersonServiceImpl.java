@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.contact.entity.Department;
 import person.dao.PersonDAO;
 import person.dao.PersonDAOImpl;
@@ -27,18 +29,25 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public void addPerson(Person person) {
+    public int addPerson(Person person) {
         dao.addPerson(person);
+        return 0;
     }
 
     @Override
-    public void removePerson(int personid) {
+    public int removePerson(int personid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updatePerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int updatePerson(Person person) {
+        try{
+            dao.updatePerson(person); 
+            return 0;
+        }catch(Exception e){
+            Logger.getLogger(PersonServiceImpl.class.getName()).log(Level.SEVERE, null, e);
+            return -1;
+        }
     }
 
     @Override
@@ -76,6 +85,11 @@ public class PersonServiceImpl implements PersonService{
                                     new Person(201403,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
         }
         return Arrays.asList();
+    }
+
+    @Override
+    public Department getDepartment(String depname) {
+        return new  Department(1,"科研计划处");
     }
 
 }

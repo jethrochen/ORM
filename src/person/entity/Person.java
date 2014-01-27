@@ -128,7 +128,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "工号:" + personId + " " + name + " 部门:" + depart + " 职称:" + jobTitle + " 学历:" + eduBackground + " 出生年月:" + (new SimpleDateFormat("yyyy-mm-dd").format(birthday));
+        return "工号:" + personId + " " + name + " 部门:" + depart + " 职称:" + jobTitle + " 学历:" + eduBackground + " 出生年月:" + (new SimpleDateFormat("yyyy-MM-dd").format(birthday));
     }
     
     
