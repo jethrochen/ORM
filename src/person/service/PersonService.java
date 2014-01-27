@@ -23,7 +23,7 @@ public interface PersonService {
     public void addPerson(Person person);
     public void removePerson(int personid);
     public void updatePerson(Person person);
-    
+    public List<Person> searchPerson(String field, Object fieldValue);
     
     /**
      * 用于分页显示时先获取总共员工个数，以便计算页数

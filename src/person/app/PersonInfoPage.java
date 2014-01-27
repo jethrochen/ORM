@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.contact.entity.Department;
 import person.controller.PersonInfoController;
 import person.entity.Person;
@@ -31,10 +32,11 @@ public class PersonInfoPage extends Page {
     @Override
     public Node createView() {
         try {
+           // SearchBox searchBox = new SearchBox();
             Pane pane = this.getFXMLPane(this.getClass(), "PersonInfo.fxml");
-            //Person youli = new Person(201402,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士");
-           // new PersonServiceImpl().addPerson(youli);
-           // ((PersonInfoController)controller).setPerson(youli);
+           // VBox vbox = new VBox();
+           // vbox.getChildren().addAll(searchBox,pane);
+           // return vbox;
             return pane;
         } catch (IOException ex) {
             Logger.getLogger(PersonInfoPage.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,9 +59,7 @@
         white;
 }
 
-.button .text {
-    -fx-effect: dropshadow( one-pass-box , rgb(0, 0, 0, 0.8), 0, 0.0 , 0 , -1 );
-}
+
 
 .combutton {
     -fx-background-color:

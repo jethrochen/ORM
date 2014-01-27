@@ -441,4 +441,9 @@ public class HrsMain extends Application {
         page.afterInitiate();
         changingPage = false;
     }
+
+    public Page getCurrentPage() {
+        return currentPage;
+    }
+    
 }

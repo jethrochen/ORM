@@ -65,4 +65,17 @@ public class PersonServiceImpl implements PersonService{
         return null;
     }
 
+    @Override
+    public List<Person> searchPerson(String field, Object fieldValue) {
+        switch(field){
+            case "personId":
+                return  Arrays.asList(new Person(201400,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
+                                    new Person(201401,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
+            case "name":
+                return  Arrays.asList(new Person(201402,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
+                                    new Person(201403,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
+        }
+        return Arrays.asList();
+    }
+
 }

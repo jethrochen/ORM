@@ -6,6 +6,7 @@
 
 package person.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -123,6 +124,11 @@ public class Person {
 
     public void setEduBackground(String eduBackground) {
         this.eduBackground = eduBackground;
+    }
+
+    @Override
+    public String toString() {
+        return "工号:" + personId + " " + name + " 部门:" + depart + " 职称:" + jobTitle + " 学历:" + eduBackground + " 出生年月:" + (new SimpleDateFormat("yyyy-mm-dd").format(birthday));
     }
     
     

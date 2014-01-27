@@ -123,9 +123,12 @@ public class PersonListPage extends Page{
         HBox hbox = new HBox();
         hbox.getChildren().add(stack);
         personInfoPage = new PersonInfoPage();
-        hbox.getChildren().add(personInfoPage.createView());
+        VBox rightVBox = new VBox();
+        SearchBox searchBox = new SearchBox();
+        rightVBox.getChildren().addAll(searchBox,personInfoPage.createView());
+        hbox.getChildren().add(rightVBox);
         root.getChildren().add(hbox);
-        root.getStylesheets().add(PersonListPage.class.getResource("Personinfo.css").toExternalForm());
+       // root.getStylesheets().add(PersonListPage.class.getResource("Personinfo.css").toExternalForm());
         service.setApp(this);
         ((PersonInfoController)personInfoPage.getController()).setPerson(selectedPerson);
         return root;
