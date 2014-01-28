@@ -163,4 +163,7 @@ public class PersonInfoController extends AnchorPane implements Initializable {
     public void backToPersonList(ActionEvent event){
         
     }
+    public void deletePerson(ActionEvent event){
+        service.removePerson(currentPerson.getPersonId());
+    }
 }

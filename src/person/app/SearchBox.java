@@ -2,9 +2,13 @@
 package person.app;
 
 import hrs.HrsMain;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -28,6 +32,7 @@ import javafx.util.Duration;
 import person.entity.Person;
 import person.service.PersonService;
 import person.service.PersonServiceImpl;
+import sun.reflect.Reflection;
 
 /**
  * A mac style search box with drop down with results
@@ -189,7 +194,30 @@ public class SearchBox extends Region {
                 final Person sr = result;
                 final HBox hBox = new HBox();
                 hBox.setFillHeight(true);
-                Label itemLabel = new Label(result.getName());
+                
+                int fieldNameIndex = choiceBox.getSelectionModel().getSelectedIndex();
+                if(fieldNameIndex == 0)
+                    fieldNameIndex = 2;
+                String fieldName = PersonField.getFieldName(fieldNameIndex);
+                Method getMethod = null;
+                try {
+                    getMethod = result.getClass().getMethod("get"+fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1, fieldName.length()), null);
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(SearchBox.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(SearchBox.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //Label itemLabel = new Label(result.getName());
+                Label itemLabel = null;
+                try {
+                    itemLabel = new Label(getMethod.invoke(sr, null).toString());
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(SearchBox.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(SearchBox.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    Logger.getLogger(SearchBox.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 itemLabel.getStyleClass().add("item-label");
                 if (first) {
                     first = false;

@@ -34,6 +34,23 @@ public enum PersonField {
         return fieldName;
     }
     static Map<Integer,String> fields;
+    static String getFieldName(int index){
+        switch(index){
+            case 1:
+                return "personId";
+            case 2:
+                return "name";
+            case 3:
+                return "birthday";
+            case 4:
+                return "depart";
+            case 5:
+                return "jobTitle";
+            case 6:
+                return "eduBackground";
+        }
+        return "";
+    }
     final static Collection<String> getFieldNames(){
         if(fields==null){
             fields = new HashMap<Integer,String>();
