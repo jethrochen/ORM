@@ -6,6 +6,8 @@
 
 package person.controller;
 
+import hrs.HrsMain;
+import hrs.controls.WarnDialog;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import person.app.ImportFileChooser;
 import person.entity.Person;
 import person.service.PersonService;
 import person.service.PersonServiceImpl;
@@ -165,5 +168,10 @@ public class PersonInfoController extends AnchorPane implements Initializable {
     }
     public void deletePerson(ActionEvent event){
         service.removePerson(currentPerson.getPersonId());
+    }
+    
+    public void processImport(ActionEvent event){
+        ImportFileChooser dialog = new ImportFileChooser(HrsMain.getHrsMain().getStage(),"导入Excel文件", "选择输入元数据文件",null,null);
+        HrsMain.getHrsMain().showModalMessage(dialog);
     }
 }

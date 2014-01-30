@@ -72,8 +72,10 @@
     </HBox>
     <HBox id="HBox" alignment="CENTER" prefWidth="351.0" spacing="20.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="109.0">
       <children>
-        <Button fx:id="update" styleClass="combutton" defaultButton="true" font="$x1" maxHeight="2.147483647E9" onAction="#processUpdate" prefHeight="50.0" prefWidth="205.0" text="Update" HBox.hgrow="ALWAYS" />
-        <Button id="update" fx:id="Button" styleClass="combutton" font="$x1" maxHeight="2.147483647E9" onAction="#deletePerson"  opacity="0.4" prefHeight="50.0" prefWidth="205.0" text="Delete" HBox.hgrow="ALWAYS" />
+        <Button fx:id="update" styleClass="combutton" defaultButton="true" font="$x1" maxHeight="2.147483647E9" onAction="#processUpdate" prefHeight="50.0" prefWidth="205.0" text="更新" HBox.hgrow="ALWAYS" />
+        <Button id="update" fx:id="Button" styleClass="combutton" font="$x1" maxHeight="2.147483647E9" onAction="#deletePerson"  opacity="0.4" prefHeight="50.0" prefWidth="205.0" text="删除" HBox.hgrow="ALWAYS" />
+        <Button fx:id="import" styleClass="combutton" font="$x1" maxHeight="2.147483647E9" onAction="#processImport" prefHeight="50.0" prefWidth="205.0" text="导入" HBox.hgrow="ALWAYS" />
+
       </children>
     </HBox>
   </children>

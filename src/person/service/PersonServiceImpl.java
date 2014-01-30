@@ -36,7 +36,8 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public int removePerson(int personid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.removePerson(personid);
+        return 0;
     }
 
     @Override

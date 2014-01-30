@@ -39,7 +39,6 @@ public class PersonListController extends Service<ObservableList<Person>> implem
     
     public void setApp(PersonListPage page){
         this.page = page;
-        //this.start();
     }
     public int getPageNum(){
         int result = (int)Math.ceil((double)personService.getPersonNum()/ONEPAGENUM);

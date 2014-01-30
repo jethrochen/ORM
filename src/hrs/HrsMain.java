@@ -8,6 +8,7 @@ package hrs;
 import hrs.controls.WindowButtons;
 import hrs.controls.WindowResizeButton;
 import hrs.Pages;
+import hrs.controls.WarnDialog;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -139,7 +140,7 @@ public class HrsMain extends Application {
         modalDimmer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent t) {
                 t.consume();
-                hideModalMessage();
+                //hideModalMessage();
             }
         });
         modalDimmer.setVisible(false);
@@ -304,7 +305,7 @@ public class HrsMain extends Application {
         settingsButton.setGraphic(new ImageView(new Image(HrsMain.class.getResourceAsStream("images/settings.png"))));
         settingsButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent event){
-                //showSettingDialog();
+                showModalMessage(new WarnDialog(stage,"ik","kj",null,null));
             }
         });
         settingsButton.setMaxHeight(Double.MAX_VALUE);
@@ -341,14 +342,28 @@ public class HrsMain extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    public void showModalMessage(Node message) {
+        modalDimmer.getChildren().add(message);
+        modalDimmer.setOpacity(0);
+        modalDimmer.setVisible(true);
+        modalDimmer.setCache(true);
+        TimelineBuilder.create().keyFrames(
+            new KeyFrame(Duration.seconds(0.4), 
+                new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent t) {
+                        modalDimmer.setCache(false);
+                    }
+                },
+                new KeyValue(modalDimmer.opacityProperty(),1, Interpolator.EASE_BOTH)
+        )).build().play();
+    }
     /**
      * Hide any modal message that is shown
      */
     public void hideModalMessage() {
         modalDimmer.setCache(true);
         TimelineBuilder.create().keyFrames(
-                new KeyFrame(Duration.seconds(1),
+                new KeyFrame(Duration.seconds(0.4),
                         new EventHandler<ActionEvent>() {
                             public void handle(ActionEvent t) {
                                 modalDimmer.setCache(false);
@@ -445,5 +460,10 @@ public class HrsMain extends Application {
     public Page getCurrentPage() {
         return currentPage;
     }
-    
+    public Pane getPageArea(){
+        return this.pageArea;
+    }
+    public Stage getStage(){
+        return this.stage;
+    }
 }
