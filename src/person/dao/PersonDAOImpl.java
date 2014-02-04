@@ -23,6 +23,7 @@ public class PersonDAOImpl implements PersonDAO {
         s.beginTransaction();
         List<Person> list = s.createQuery("from Person").list();
         s.getTransaction().commit();
+        s.close();
         return list;
     }
 
@@ -32,16 +33,28 @@ public class PersonDAOImpl implements PersonDAO {
         s.beginTransaction();
         s.save(p);
         s.getTransaction().commit();
+        s.close();
     }
 
     @Override
     public Person getPerson(int personid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session s = HibernateUtil.openSession();
+        s.beginTransaction();
+        Person per;// = (Person) s.byId(Person.class).load(personid);
+        per = (Person) s.get(Person.class, personid);
+        s.getTransaction().commit();
+        s.close();
+        return per;
     }
 
     @Override
     public void removePerson(int personid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session s = HibernateUtil.openSession();
+        s.beginTransaction();
+        Person per = (Person) s.load(Person.class, personid);
+        s.delete(per);
+        s.getTransaction().commit();
+        s.close();
     }
 
     @Override
@@ -50,16 +63,28 @@ public class PersonDAOImpl implements PersonDAO {
         s.beginTransaction();
         s.update(person);
         s.getTransaction().commit();
+        s.close();
     }
 
     @Override
     public int getPersonNum() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session s = HibernateUtil.openSession();
+        s.beginTransaction();
+        int n = s.createQuery("from Person").getFetchSize();
+        s.getTransaction().commit();
+        s.close();
+        return n;
     }
 
     @Override
     public List<Person> getPagedPerson(int pageId, int onePageNum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session s = HibernateUtil.openSession();
+        s.beginTransaction();
+        List<Person> res = s.createQuery("from Person").setFirstResult(pageId*onePageNum)
+                .setMaxResults(onePageNum).list();
+        s.getTransaction().commit();
+        s.close();
+        return res;
     }
 
 }

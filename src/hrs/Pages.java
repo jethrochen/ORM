@@ -6,6 +6,7 @@
 
 package hrs;
 
+import incumbency.export.app.ExportIncumbency;
 import java.util.HashMap;
 import java.util.Map;
 import login.app.LoginPage;
@@ -24,6 +25,7 @@ public class Pages {
     public static final String PERSONINFO = "PERSON INFO";
     public static final String PERSONLIST = "PERSON LIST";
     public static final String PROJECT = "PROJECT INFO";
+    public static final String EXPORTINCUMBENCY = "EXPORT INCUMBENCY";
     public static final Map<String,Page> pages;
     static{
         pages = new HashMap<String,Page>();
@@ -31,6 +33,7 @@ public class Pages {
         pages.put(USERPROFILE,new ProfilePage());
         pages.put(PERSONINFO, new PersonInfoPage());
         pages.put(PERSONLIST, new PersonListPage());
+        pages.put(EXPORTINCUMBENCY, new ExportIncumbency());
     }
     public static Page getPage(String pageName){
         return pages.get(pageName);

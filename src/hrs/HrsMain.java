@@ -163,7 +163,7 @@ public class HrsMain extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("goto personinfo page");
-                goToPage(Pages.PERSONINFO);
+                goToPage(Pages.EXPORTINCUMBENCY);
             }
         });
         toolBar.getItems().add(highlightsButton);

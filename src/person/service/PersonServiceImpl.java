@@ -54,7 +54,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public int getPersonNum() {
 
-        return 2;
+        return dao.getPersonNum();
     }
 
     @Override
@@ -64,15 +64,7 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public List<Person> getPagedPerson(int pageId, int onePageNum) {
-        switch(pageId){
-            case 0:
-                return  Arrays.asList(new Person(201400,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
-                                    new Person(201401,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
-            case 1:
-                return  Arrays.asList(new Person(201402,"尤立",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"),
-                                    new Person(201403,"陈杰",new Date(),new Department(1,"科研计划处"),"攻城狮","硕士"));
-        }
-        return null;
+        return dao.getPagedPerson(pageId, onePageNum);
     }
 
     @Override
